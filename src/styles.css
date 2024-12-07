@@ -127,7 +127,7 @@
   .user-intro {
     display: flex;
     justify-content: space-between;
-    align-items: space-evenly;
+    align-items: center;
     padding: 20px;
     background: #ffffff;
     border-radius: 10px;
@@ -139,6 +139,7 @@
     display: flex;
     gap: 25px;
   }
+
   .user-intro .avatar img {
     width: 60px;
     height: 60px;
@@ -155,6 +156,8 @@
     display: flex;
     flex-wrap: nowrap;
     height: fit-content;
+    align-items: center;
+    justify-content: center;
   }
   .action-buttons button {
     background-color: #aa0000;
@@ -162,7 +165,7 @@
     border: none;
     padding: 10px 20px;
     margin-left: 10px;
-    border-radius: 5px;
+    border-radius: 50rem;
     cursor: pointer;
     transition: background 0.2s ease;
   }
@@ -263,6 +266,8 @@
     cursor: pointer;
     position: relative;
     transition: background-color 0.2s ease;
+    flex-shrink: 0;
+
 }
 
 .project-card input[type="checkbox"]:checked {
