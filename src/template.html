@@ -6,137 +6,132 @@
     <title>gitdone</title>
 </head>
 <body>
-    <body>
-        <header>
-            <div class="logo">GitDone</div>
-            <div class="controls">
-                <button>Add Task</button>
-                <button>Profile</button>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+        <div class="logo">
+            <span>📊</span> gitdone
+        </div>
+        </div>
+        <nav class="tasks">
+            <h4>Tasks</h4>
+            <ul>
+                <li class="menu-item"><span>🏠</span> Today</li>
+                <li class="menu-item"><span>👤</span> This Week</li>
+                <li class="menu-item"><span>✉️</span> This Month</li>
+                
+            </ul>
+        </nav>
+
+        <nav class="projects">
+            <h4>Projects</h4>
+            <ul>
+                <li class="menu-item"><span>🏠</span> Home</li>
+                <li class="menu-item"><span>👤</span> Profile</li>       
+            </ul>
+        </nav>
+        
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+
+        <!-- User Introduction -->
+        <section class="user-intro">
+            <div class="avatar-right">
+                <div class="avatar">
+                <!-- <img src="face-man-shimmer.svg" alt="User Avatar" /> -->
+                </div>
+                <div class="user-greeting">
+                <p>Hi there,</p>
+                <h2>Morgan Oakley <span>(@morgan)</span></h2>
+                </div>
             </div>
-        </header>
-        <div class="lower">
-            <div class="sidebar">
-                <h2>Projects</h2>
-                <ul>
-                    <li>Project A</li>
-                    <li>Project B</li>
-                    <li>Project C</li>
-                </ul>
-                <button>Add Project</button>
+            <div class="action-buttons">
+                <button class="btn-new">New</button>
+                <button class="btn-upload">Upload</button>
+                <button class="btn-share">Share</button>
             </div>
-            <div class="main">
-                <div class="todo-item">
-                    <header>
-                        <div class="project">Project A</div>
-                        <div class="details">12/07/2024, 10:00 AM</div>
-                    </header>
-                    <div class="priority high">High</div>
-                    <div class="actions">
-                        <input type="checkbox" title="Mark as complete">
+        </section>
+
+        <!-- Main Dashboard -->
+        <div class="dashboard">
+        <!-- Projects Section -->
+        <div class="projects-section">
+            <h3>Today</h3>
+            <div class="projects-grid">
+             <!-- Individual Project Cards -->
+                <div class="project-card">
+                    <div class="project-card-content">
+                        <h4>Super Cool Project</h4>
+                        <p>Sed tempus ut lacus ut scelerisque. Suspendisse sollicitudin nibh erat, id facilisis felis accumsan nec.</p>
+                        <div class="card-actions">
+                            <span>⭐ Priority </span>
+                            <span>👁️ Time </span>
+                            <span>🔗</span>
+                        </div>
                     </div>
-                </div>
-                <div class="todo-item">
-                    <header>
-                        <div class="project">Project B</div>
-                        <div class="details">12/08/2024, 2:00 PM</div>
-                    </header>
-                    <div class="priority medium">Medium</div>
-                    <div class="actions">
-                        <input type="checkbox" title="Mark as complete">
-                    </div>
-                </div>
-                <div class="todo-item">
-                    <header>
-                        <div class="project">Project C</div>
-                        <div class="details">12/09/2024, 9:00 AM</div>
-                    </header>
-                    <div class="priority low">Low</div>
-                    <div class="actions">
-                        <input type="checkbox" title="Mark as complete">
-                    </div>
+                    <input type="checkbox" name="" id="">
                 </div>
 
-                <div class="todo-item">
-                    <header>
-                        <div class="project">Project C</div>
-                        <div class="details">12/09/2024, 9:00 AM</div>
-                    </header>
-                    <div class="priority low">Low</div>
-                    <div class="actions">
-                        <input type="checkbox" title="Mark as complete">
+                <div class="project-card">
+                    <div class="project-card-content">
+                        <h4>Super Cool Project</h4>
+                        <p>Sed tempus ut lacus ut scelerisque. Suspendisse sollicitudin nibh erat, id facilisis felis accumsan nec.</p>
+                        <div class="card-actions">
+                        <span>⭐ Priority </span>
+                        <span>👁️ Time </span>
+                        <span>🔗</span>
+                        </div>
                     </div>
-                </div>
-                <div class="todo-item">
-                    <header>
-                        <div class="project">Project C</div>
-                        <div class="details">12/09/2024, 9:00 AM</div>
-                    </header>
-                    <div class="priority low">Low</div>
-                    <div class="actions">
-                        <input type="checkbox" title="Mark as complete">
-                    </div>
+                    <input type="checkbox" name="" id="">
                 </div>
 
-                <div class="todo-item">
-                    <header>
-                        <div class="project">Project C</div>
-                        <div class="details">12/09/2024, 9:00 AM</div>
-                    </header>
-                    <div class="priority low">Low</div>
-                    <div class="actions">
-                        <input type="checkbox" title="Mark as complete">
+                <div class="project-card">
+                    <div class="project-card-content">
+                        <h4>Super Cool Project</h4>
+                        <p>Sed tempus ut lacus ut scelerisque. Suspendisse sollicitudin nibh erat, id facilisis felis accumsan nec.</p>
+                        <div class="card-actions">
+                        <span>⭐ Priority </span>
+                        <span>👁️ Time </span>
+                        <span>🔗</span>
+                        </div>
                     </div>
+                    <input type="checkbox" name="" id="">
                 </div>
 
-                <div class="todo-item">
-                    <header>
-                        <div class="project">Project C</div>
-                        <div class="details">12/09/2024, 9:00 AM</div>
-                    </header>
-                    <div class="priority low">Low</div>
-                    <div class="actions">
-                        <input type="checkbox" title="Mark as complete">
+
+                <div class="project-card">
+                    <div class="project-card-content">
+                        <h4>Super Cool Project</h4>
+                        <p>Sed tempus ut lacus ut scelerisque. Suspendisse sollicitudin nibh erat, id facilisis felis accumsan nec.</p>
+                        <div class="card-actions">
+                        <span>⭐ Priority </span>
+                        <span>👁️ Time </span>
+                        <span>🔗</span>
+                        </div>
                     </div>
+                    <input type="checkbox" name="" id="">
                 </div>
 
-                <div class="todo-item">
-                    <header>
-                        <div class="project">Project C</div>
-                        <div class="details">12/09/2024, 9:00 AM</div>
-                    </header>
-                    <div class="priority low">Low</div>
-                    <div class="actions">
-                        <input type="checkbox" title="Mark as complete">
+                <div class="project-card">
+                    <div class="project-card-content">
+                        <h4>Super Cool Project</h4>
+                        <p>Sed tempus ut lacus ut scelerisque. Suspendisse sollicitudin nibh erat, id facilisis felis accumsan nec.</p>
+                        <div class="card-actions">
+                        <span>⭐ Priority </span>
+                        <span>👁️ Time </span>
+                        <span>🔗</span>
+                        </div>
                     </div>
+                    <input type="checkbox" name="" id="">
                 </div>
-
-                <div class="todo-item">
-                    <header>
-                        <div class="project">Project C</div>
-                        <div class="details">12/09/2024, 9:00 AM</div>
-                    </header>
-                    <div class="priority low">Low</div>
-                    <div class="actions">
-                        <input type="checkbox" title="Mark as complete">
-                    </div>
-                </div>
-
-                <div class="todo-item">
-                    <header>
-                        <div class="project">Project C</div>
-                        <div class="details">12/09/2024, 9:00 AM</div>
-                    </header>
-                    <div class="priority low">Low</div>
-                    <div class="actions">
-                        <input type="checkbox" title="Mark as complete">
-                    </div>
-                </div>
-               
-                </div>
+            
             </div>
         </div>
-    </body>
-    </html>
-    
+
+        
+        </section>
+    </div>
 </body>
 </html>
