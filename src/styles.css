@@ -194,42 +194,15 @@ body {
 }
 
 .project-card {
-  background: #ffffff;
+ 
   border-radius: 10px;
   display: flex;
   align-items: center; /* Vertically center items */
   justify-content: space-evenly; /* Spread out content and checkbox */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  padding: 15px;
-}
-.project-card-content {
-  
-  padding: 15px;
+  box-shadow: 2px 5px 5px 2px rgba(0, 0, 0, 0.1);
+  padding: 5px;
 }
 
-.project-card-content h4 {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.project-card-content p {
-  word-wrap: break-word;
-  margin-bottom: 15px;
-  font-size: 0.9rem;
-  color: #666;
-}
-
-.card-actions {
-  display: flex;
-  justify-content: flex-start;
-  gap: 10px;
-  color: #1d4ed8;
-}
-
-.card-actions span{
-  font-size: 0.8rem;
-}
 
 @media screen and (max-width: 768px) {
   .sidebar {
@@ -255,34 +228,6 @@ body {
   }
 } 
 
-
-.project-card input[type="checkbox"] {
-  appearance: none; /* Remove default checkbox styling */
-  width: 24px; /* Make larger */
-  height: 24px; /* Make larger */
-  border: 2px solid #aa0000; /* Dark red border */
-  border-radius: 50%; /* Make round */
-  outline: none;
-  cursor: pointer;
-  position: relative;
-  transition: background-color 0.2s ease;
-  flex-shrink: 0;
-
-}
-
-.project-card input[type="checkbox"]:checked {
-  background-color: #aa0000; /* Fill with dark red when checked */
-}
-
-.project-card input[type="checkbox"]:checked::after {
-  content: '✓';
-  color: white;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 14px;
-}
 
 /* Modal Styles */
 .modal {
@@ -356,4 +301,145 @@ body {
 textarea {
   resize: vertical;
   min-height: 100px;
+}
+
+.project-card-content {
+  width: 100%;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  margin-bottom: 10px;
+}
+
+.todo-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 15px;
+  gap: 15px;
+}
+
+.todo-main-info {
+  flex-grow: 1;
+  min-width: 0; /* Ensures content can shrink */
+}
+
+.todo-main-info h4 {
+  margin: 0rgb(3, 2, 2)x 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.todo-main-info p {
+  margin: 0 0 8px 0;
+  font-size: 0.85rem;
+  color: #666;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-actions {
+  display: flex;
+  gap: 10px;
+  font-size: 0.75rem;
+  color: #555;
+}
+
+.todo-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.todo-controls input[type="checkbox"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #4a4a4a;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.todo-controls input[type="checkbox"]:checked {
+  background-color: #4a4a4a;
+}
+
+.todo-controls input[type="checkbox"]:checked::after {
+  content: '✓';
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 12px;
+}
+
+.todo-actions {
+  display: flex;
+  gap: 5px;
+}
+
+.todo-actions button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 4px;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  padding: 0;
+}
+
+.todo-actions .edit-todo-btn {
+  color: #1d4ed8;
+}
+
+.todo-actions .delete-todo-btn {
+  color: #dc2626;
+}
+
+.todo-actions button:hover {
+  background-color: rgba(0,0,0,0.1);
+}
+
+.todo-main-info h4,
+.todo-main-info p {
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.todo-main-info h4::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #888;
+    transition: width 0.3s ease;
+}
+
+.todo-content.completed {
+    background-color: #f0f0f0;
+}
+
+.todo-content.completed .todo-main-info h4,
+.todo-content.completed .todo-main-info p {
+    color: #888;
+}
+
+.todo-content.completed .todo-main-info h4::after,
+.todo-content.completed .todo-main-info p::after {
+    width: 100%;
 }
