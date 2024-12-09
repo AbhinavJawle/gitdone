@@ -1,15 +1,15 @@
 // projectManager.js
 export class ProjectManager {
     constructor() {
-        // Initialize with a default project
         this.projects = [
             { 
+            // Initialize with a default project
                 id: 'default', 
-                name: '🏠 Default Project', 
+                name: 'Default Project', 
                 todos: [] 
             }
         ];
-        this.currentProjectId = 'default';
+        //this.currentProjectId = 'default';
     }
 
     // Create a new project
@@ -19,12 +19,12 @@ export class ProjectManager {
             name: name,
             todos: []
         };
-        this.projects.push(newProject);
+        this.projects.push(newProject); //******* */
         return newProject;
     }
 
     // Get all projects
-    getAllProjects() {
+    getAllProjects() { /*********** */
         return this.projects;
     }
 
@@ -39,7 +39,7 @@ export class ProjectManager {
     }
 
     // Get current project
-    getCurrentProject() {
+    getCurrentProject() { /********** */
         return this.getProjectById(this.currentProjectId);
     }
 
@@ -64,3 +64,4 @@ export class ProjectManager {
         }
     }
 }
+

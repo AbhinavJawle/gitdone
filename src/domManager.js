@@ -1,15 +1,43 @@
 import { ProjectManager } from './projectManager.js';
 import { TodoItem } from './todoItem.js';
 import './styles.css'
+
 export class DOMManager {
     constructor() {
         this.projectManager = new ProjectManager();
+        
+        // Load projects first
+        const loadedProjects = this.loadProjects();
+        
+        // If no projects exist, create a default project
+        if (loadedProjects.length === 0) {
+            this.projectManager.createProject('Default Project');
+        }
+        
+        // Set projects and current project
+        this.projectManager.projects = loadedProjects;
+        
+        // Set the first project as current if not already set
+        if (!this.projectManager.currentProjectId && loadedProjects.length > 0) {
+            this.projectManager.setCurrentProject(loadedProjects[0].id);
+        }
         this.initEventListeners();
         this.renderProjects();
         
         // Render todos for the default project on initial load
         const defaultProject = this.projectManager.getCurrentProject();
         this.renderTodos(defaultProject.id);
+    }
+
+    loadProjects() {
+        const storedProjects = localStorage.getItem('projects');
+        return storedProjects 
+            ? JSON.parse(storedProjects) 
+            : [];
+    }
+
+    saveProject(){
+        localStorage.setItem('projects', JSON.stringify(this.projectManager.getAllProjects()))
     }
 
     initEventListeners() {
@@ -38,6 +66,7 @@ export class DOMManager {
 
             if (projectName) {
                 const newProject = this.projectManager.createProject(projectName);
+                this.saveProject()
                 this.renderProjects();
                 addProjectModal.style.display = 'none';
                 projectNameInput.value = ''; // Clear input
@@ -75,16 +104,15 @@ export class DOMManager {
             if (title) {
                 const currentProject = this.projectManager.getCurrentProject();
                 const todoToEdit = currentProject.todos.find(todo => todo.id === todoId);
-
                 if (todoToEdit) {
-                    todoToEdit.update({
-                        title,
-                        description,
-                        priority,
-                        dueDate
-                    });
-
+                    // Directly update todo properties
+                    todoToEdit.title = title;
+                    todoToEdit.description = description;
+                    todoToEdit.priority = priority;
+                    todoToEdit.dueDate = dueDate;
+        
                     this.renderTodos(currentProject.id);
+                    this.saveProject(); // Save changes to local storage
                     editTodoModal.style.display = 'none';
                 }
             }
@@ -171,30 +199,6 @@ export class DOMManager {
         }
     }
 
-    // showAddTodoModal() {
-    //     // Create a modal or form for adding a new todo
-    //     // This is a simplified version - you'd want a more robust modal in a real app
-    //     const title = prompt('Enter todo title:');
-    //     const description = prompt('Enter todo description:');
-    //     const priority = prompt('Enter priority (low/medium/high):');
-    //     const dueDate = prompt('Enter due date (YYYY-MM-DD):');
-
-    //     if (title) {
-    //         const newTodo = new TodoItem({
-    //             title,
-    //             description,
-    //             priority,
-    //             dueDate
-    //         });
-
-    //         // Add to the current project
-    //         const currentProject = this.projectManager.getCurrentProject();
-    //         this.projectManager.addTodoToProject(currentProject.id, newTodo);
-            
-    //         this.renderTodos(currentProject.id);
-    //     }
-    // }
-
     renderTodos(projectId) {
         const project = this.projectManager.getProjectById(projectId);
         const projectsGrid = document.querySelector('.projects-grid');
@@ -208,61 +212,59 @@ export class DOMManager {
             const todoCard = this.createTodoCard(todo);
             projectsGrid.appendChild(todoCard);
         });
+
+        this.saveProject();
     }
 
     createTodoCard(todo) {
         const card = document.createElement('div');
-        card.classList.add('project-card');
-        card.dataset.todoId = todo.id;
-
-        // Priority color coding
-        let priorityColor = '';
-        switch(todo.priority) {
-            case 'high': 
-                priorityColor = 'text-red-600';
-                break;
-            case 'medium':
-                priorityColor = 'text-yellow-600';
-                break;
-            default:
-                priorityColor = 'text-green-600';
-        }
-
-        card.innerHTML = `
-            <div class="project-card-content">
-                <div class="todo-content">
-                    <div class="todo-main-info">
-                        <h4>${todo.title}</h4>
-                        <p>${todo.description || 'No description'}</p>
-                        <div class="card-actions">
-                            <span class="${priorityColor}">⭐ Priority: ${todo.priority}</span>
-                            <span>👁️ Due: ${todo.dueDate || 'No due date'}</span>
-                        </div>
+    card.classList.add('project-card');
+    card.dataset.todoId = todo.id;
+    // Priority color coding
+    let priorityColor = '';
+    switch(todo.priority) {
+        case 'high':
+            priorityColor = 'text-red-600';
+            break;
+        case 'medium':
+            priorityColor = 'text-yellow-600';
+            break;
+        default:
+            priorityColor = 'text-green-600';
+    }
+    card.innerHTML = `
+        <div class="project-card-content">
+            <div class="todo-content ${todo.isCompleted ? 'completed' : ''}">
+                <div class="todo-main-info">
+                    <h4>${todo.title}</h4>
+                    <p>${todo.description || 'No description'}</p>
+                    <div class="card-actions">
+                        <span class="${priorityColor}">⭐ Priority: ${todo.priority}</span>
+                        <span>👁️ Due: ${todo.dueDate || 'No due date'}</span>
                     </div>
-                    <div class="todo-controls">
-                        <input type="checkbox" ${todo.isCompleted ? 'checked' : ''}>
-                        <div class="todo-actions">
-                            <button class="edit-todo-btn">✏️</button>
-                            <button class="delete-todo-btn">🗑️</button>
-                        </div>
+                </div>
+                <div class="todo-controls">
+                    <input type="checkbox" ${todo.isCompleted ? 'checked' : ''}>
+                    <div class="todo-actions">
+                        <button class="edit-todo-btn">✏️</button>
+                        <button class="delete-todo-btn">🗑️</button>
                     </div>
                 </div>
             </div>
-        `;
-
-        // Add event listener for checkbox
-        const checkbox = card.querySelector('input[type="checkbox"]');
-        const todoContent = card.querySelector('.todo-content');
-        checkbox.addEventListener('change', () => {
-            todo.toggleComplete();
-            if (checkbox.checked) {
-                console.log('checked')
-                todoContent.classList.add('completed');
-            } else {
-                console.log('unchecked');
-                todoContent.classList.remove('completed');
-            }
-        });
+        </div>
+    `;
+    const checkbox = card.querySelector('input[type="checkbox"]');
+    const todoContent = card.querySelector('.todo-content');
+    checkbox.addEventListener('change', () => {
+        const currentProject = this.projectManager.getCurrentProject();
+        const todoToUpdate = currentProject.todos.find(t => t.id === todo.id);
+       
+        if (todoToUpdate) {
+            todoToUpdate.isCompleted = checkbox.checked;
+            todoContent.classList.toggle('completed', checkbox.checked);
+            this.saveProject(); // Explicitly save to localStorage
+        }
+    });
 
         const editButton = card.querySelector('.edit-todo-btn');
         editButton.addEventListener('click', () => {
@@ -276,6 +278,7 @@ export class DOMManager {
             document.getElementById('edit-todo-due-date').value = todo.dueDate;
 
             editTodoModal.style.display = 'block';
+            this.saveProject();
         });
 
         // Delete Todo Button
@@ -285,7 +288,7 @@ export class DOMManager {
             
             // Remove todo from the project
             this.projectManager.removeTodoFromProject(currentProject.id, todo.id);
-            
+            this.saveProject();
             // Re-render todos
             this.renderTodos(currentProject.id);
         });
